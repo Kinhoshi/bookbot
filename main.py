@@ -7,7 +7,7 @@ def main():
     num_characters = count_characters(words)
     num_letters = book_report(num_characters)
     with open("books/report.txt", "a") as f:
-        print(f"That's a total of {"{:,}".format(num_letters[1])} letters!\n*** This is the end of the {book_name} report! ***", file=f)
+        print(f"That's a total of {"{:,}".format(num_letters[1])} letters!\n*** This is the end of the {book_name} report. ***", file=f)
         
 
 def read_book(book):
@@ -40,7 +40,7 @@ def book_report(num_characters):
     for letters in alphabet:
         num_letters[letters] = num_characters[letters]
         with open("books/report.txt", "a") as f:
-            print(f"The '{letters}' character was found in frankenstein.txt {num_letters[letters]} times!", file=f)
+            print(f"The '{letters}' character was found in frankenstein.txt {num_letters[letters]} times.", file=f)
     for i in num_letters.values():
         total += i
     return num_letters, total
