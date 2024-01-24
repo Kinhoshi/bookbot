@@ -12,3 +12,6 @@ I'm assuming that this project won't function very well if you don't have a subd
 Currently, I'm satisfied that this project works, but not satisfied with how clunky it appears, I may or may not edit it to look nicer and work better, as my skills get better.
 
 If you at all wasted your time with this small script, or even if you took the time to read this to the end, I want to thank you for choosing to spend your time on my project and the contents within!
+
+Changelog:
+Revised the read_book function with a simple try/except block that will create a simple error.log if the file is not found.

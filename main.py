@@ -11,13 +11,17 @@ def main():
         
 
 def read_book(book):
-    with open(book) as file:
-        return file.read()
+    try:
+        with open(book) as file:
+            return file.read()
+    except:
+        with open("error.log", "w") as f:
+                print(f"*** Error! {book} does not exist. ***", file=f)
     
 def count_words(words):
     numbers = words.split()
     with open("books/report.txt", "w") as f:
-        print(f"*** Beginning report of frankenstein.txt, hold tight! ***", file=f)
+        print(f"*** Beginning report of frankenstein.txt, hold tight... ***", file=f)
         print(f"{"{:,}".format(len(numbers))} words found in frakenstein.txt!", file=f)
     return len(numbers)
 
