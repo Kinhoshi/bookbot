@@ -15,3 +15,4 @@ If you at all wasted your time with this small script, or even if you took the t
 
 Changelog:
 Revised the read_book function with a simple try/except block that will create a simple error.log if the file is not found.
+Added new function to write the report to a txt file, instead of creating that report in other functions. Will revise further, at a later date.
