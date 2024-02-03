@@ -1,9 +1,10 @@
-def main():
+def main():    
     book_path = "books/"
     book_name = "frankenstein.txt"
     book = book_path + book_name
     words = read_book(book)
     num_words = count_words(words)
+    write_report(num_words)
     num_characters = count_characters(words)
     num_letters = book_report(num_characters)
     with open("books/report.txt", "a") as f:
@@ -14,15 +15,12 @@ def read_book(book):
     try:
         with open(book) as file:
             return file.read()
-    except:
+    except FileNotFoundError:
         with open("error.log", "w") as f:
                 print(f"*** Error! {book} does not exist. ***", file=f)
     
 def count_words(words):
     numbers = words.split()
-    with open("books/report.txt", "w") as f:
-        print(f"*** Beginning report of frankenstein.txt, hold tight... ***", file=f)
-        print(f"{"{:,}".format(len(numbers))} words found in frakenstein.txt!", file=f)
     return len(numbers)
 
 def count_characters(words):
@@ -32,6 +30,11 @@ def count_characters(words):
             duplicates[letters] += 1
         else: duplicates[letters] = 1
     return duplicates
+
+def write_report(num_words):
+    with open("books/report.txt", "w") as f:
+        print(f"*** Beginning report of frankenstein.txt, hold tight... ***", file=f)
+        print(f"{"{:,}".format(num_words)} words found in frakenstein.txt!", file=f)
 
 def book_report(num_characters):
     num_letters = {}
