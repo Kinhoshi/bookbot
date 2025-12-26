@@ -1,10 +1,13 @@
 # bookbot
-Boot.dev guided project
-BookBot is not only my first git project, it's my first project entirely.
+# adding this line to satisfy test, will delete later
+BookBot is my first [Boot.dev](https://www.boot.dev) project!
+
+[Boot.dev](https://boot.dev) guided project
+BookBot is not only my first python project, it's my first project entirely.
 Please bear with me as I have never before in my life written a readme!
 
 BookBot is a simple python script that was created with guidance from https://boot.dev
-it takes the example provided, Frankenstein by Mary Shelley and creates a simple report based on the contents of frankenstein.txt
+it reads all the characters in a simple .txt document, e.g Frankenstein.txt by Mary Shelley and creates a simple report based on the contents of frankenstein.txt
 it will then spit that report out in a simple txt file named "report.txt" in the books directory.
 
 I'm assuming that this project won't function very well if you don't have a subdirectory named "books" and the aformentioned frankenstein.txt within the books subdirectory.
