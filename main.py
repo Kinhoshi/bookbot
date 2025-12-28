@@ -1,54 +1,52 @@
-def main():    
-    book_path = "books/"
-    book_name = "frankenstein.txt"
-    book = book_path + book_name
-    words = read_book(book)
-    num_words = count_words(words)
-    write_report(num_words)
-    num_characters = count_characters(words)
-    num_letters = book_report(num_characters)
-    with open("books/report.txt", "a") as f:
-        print(f"That's a total of {"{:,}".format(num_letters[1])} letters!\n*** This is the end of the {book_name} report. ***", file=f)
-        
+import sys
+from stats import book_analyzer
+from stats import count_characters
+from stats import sort_dict
+from stats import sum_of_letters
 
-def read_book(book):
-    try:
-        with open(book) as file:
-            return file.read()
-    except FileNotFoundError:
-        with open("error.log", "w") as f:
-                print(f"*** Error! {book} does not exist. ***", file=f)
-    
-def count_words(words):
-    numbers = words.split()
-    return len(numbers)
+num_words = book_analyzer("num words") # number of words in the supplied .txt
+num_characters = count_characters() # character dictionary and count of each item
+contents = book_analyzer("words") # plain text of the supplied .txt
+report = sort_dict() # sorted list of dictionaries with character and count
+book = ""
 
-def count_characters(words):
-    duplicates = {}
-    for letters in words.lower():
-        if letters in duplicates:
-            duplicates[letters] += 1
-        else: duplicates[letters] = 1
-    return duplicates
+if len(sys.argv) < 2 and ".txt" not in sys.argv[0]:
+       print("Usage: python3 main.py <path_to_book>")
+       sys.exit(1)
+elif ".txt" in sys.argv[0]:
+        book = sys.argv[0]
+else: book = sys.argv[1]
 
-def write_report(num_words):
-    with open("books/report.txt", "w") as f:
-        print(f"*** Beginning report of frankenstein.txt, hold tight... ***", file=f)
-        print(f"{"{:,}".format(num_words)} words found in frakenstein.txt!", file=f)
+def main():
+    write_report()
 
-def book_report(num_characters):
-    num_letters = {}
-    alphabet = []
-    total = 0
-    for characters in num_characters:
-        if characters.isalpha() == True:
-            alphabet.append(characters)
-            alphabet.sort()
-    for letters in alphabet:
-        num_letters[letters] = num_characters[letters]
-        with open("books/report.txt", "a") as f:
-            print(f"The '{letters}' character was found in frankenstein.txt {num_letters[letters]} times.", file=f)
-    for i in num_letters.values():
-        total += i
-    return num_letters, total
+def strip_file_location(book):
+    # return file name only, strip out anything before "/"
+    for words in book.split("/"):
+        if ".txt" in words:
+            return words
+
+def write_report():
+    # create a txt document named report.txt and capture the results within
+    book_name = strip_file_location(book)
+    total_letters = sum_of_letters()
+    message = (
+        f"*** Beginning analysis of {book_name} ***\n\n"
+        "===== Word Count =====\n"
+        f"Found {num_words} total words!\n\n"
+        "===== Character Count =====\n"
+    )
+    # for loop to append each letter and its count to the message
+    for data in report:
+        message += str(data["char"]) + ": " + str(data["num"]) + "\n"
+
+    message += (
+        f"That's a total of {total_letters} letters in the book!\n\n"
+        "Thank you for using BookBot!\n\n"
+        "*** End of analysis ***"
+    )
+    with open("report.txt", "w") as f:
+        print(message, file=f)
+    return print(message)
+
 main()

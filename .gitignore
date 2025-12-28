@@ -1,2 +1,4 @@
-books/
-/error.log
+*
+!main.py
+!README.md
+!stats.py
