@@ -1,8 +1,21 @@
 import sys
-from stats import book_analyzer
-from stats import count_characters
-from stats import sort_dict
-from stats import sum_of_letters
+import os
+from datetime import datetime
+from stats import *
+
+current_time = datetime.now().strftime("%H:%M:%S")
+
+if len(sys.argv) < 2 and ".txt" not in sys.argv[0]:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+elif ".txt" in sys.argv[0]:
+    book = sys.argv[0]
+else: book = sys.argv[1]
+
+if not os.path.isfile(book):
+    print(f"[{current_time}] *** Error! {book} not found! ***")
+    open("error.log", "a").write(f"[{current_time}] *** Error! {book} not found! ***\n")
+    sys.exit(1)
 
 num_words = book_analyzer("num words") # number of words in the supplied .txt
 num_characters = count_characters() # character dictionary and count of each item
@@ -10,21 +23,15 @@ contents = book_analyzer("words") # plain text of the supplied .txt
 report = sort_dict() # sorted list of dictionaries with character and count
 book = ""
 
-if len(sys.argv) < 2 and ".txt" not in sys.argv[0]:
-       print("Usage: python3 main.py <path_to_book>")
-       sys.exit(1)
-elif ".txt" in sys.argv[0]:
-        book = sys.argv[0]
-else: book = sys.argv[1]
 
 def main():
     write_report()
 
-def strip_file_location(book):
-    # return file name only, strip out anything before "/"
+def strip_file_location(book): # return file name only, strip out path
     for words in book.split("/"):
-        if ".txt" in words:
+        if words.endswith(".txt"):
             return words
+    return book
 
 def write_report():
     # create a txt document named report.txt and capture the results within

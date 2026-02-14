@@ -1,4 +1,7 @@
 import sys
+from datetime import datetime
+
+current_time = datetime.now().strftime("%H:%M:%S")
 
 def book_analyzer(x):
     # attempt to open supplied txt, create an error log if not found
@@ -12,8 +15,8 @@ def book_analyzer(x):
         with open(book) as f:
             contents = f.read().lower()
     except FileNotFoundError:
-        with open("error.log", "w") as f:
-            print(f"*** Error! {book} not found! ***", file=f)
+        with open("error.log", "a") as f:
+            print(f"[{current_time}] *** Error! {book} not found! ***", file=f)
     if x == "num words":
         # return the number of words in the supplied book
         return len(contents.split())
