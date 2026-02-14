@@ -5,13 +5,6 @@ from stats import *
 
 current_time = datetime.now().strftime("%H:%M:%S")
 
-if len(sys.argv) < 2 and ".txt" not in sys.argv[0]:
-    print("Usage: python3 main.py <path_to_book>")
-    sys.exit(1)
-elif ".txt" in sys.argv[0]:
-    book = sys.argv[0]
-else: book = sys.argv[1]
-
 if not os.path.isfile(book):
     print(f"[{current_time}] *** Error! {book} not found! ***")
     open("error.log", "a").write(f"[{current_time}] *** Error! {book} not found! ***\n")
@@ -23,6 +16,12 @@ contents = book_analyzer("words") # plain text of the supplied .txt
 report = sort_dict() # sorted list of dictionaries with character and count
 book = ""
 
+if len(sys.argv) < 2 and ".txt" not in sys.argv[0]:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+elif ".txt" in sys.argv[0]:
+    book = sys.argv[0]
+else: book = sys.argv[1]
 
 def main():
     write_report()

@@ -14,6 +14,7 @@ I think I'm pretty satisfied with this script and will only revisit this if the 
 If you at all wasted your time with this small script, or even if you took the time to read this to the end, I want to thank you for choosing to spend your time on my project and the contents within!
 
 Changelog:<br>
+02/13/26 -- Added os.path.isfile check to make sure the supplied file exists; added timestamps to log entries.<br>
 12/27/25 -- Completely re-written the script using the updated course on https://boot.dev and a hopefully little bit of better knowledge of python.<br>
 1/23/24 -- Revised the read_book function with a simple try/except block that will create a simple error.log if the file is not found.<br>
 1/19/24 -- Added new function to write the report to a txt file, instead of creating that report in other functions. Will revise further, at a later date.
